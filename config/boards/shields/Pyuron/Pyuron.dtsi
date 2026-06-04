@@ -9,6 +9,10 @@
     nfct-pins-as-gpios;
 };
 
+&zip_temp_layer {
+    require-prior-idle-ms = <150>;
+};
+
 / {
     chosen {
         zmk,physical-layout = &default_layout;
@@ -30,7 +34,9 @@ split_inputs {
       device = <&trackball_split_L>;
         input-processors =
             <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
-            <&zip_temp_layer 4 1000>;
+            <&zip_xy_scaler 1 8>,
+            <&zip_xy_to_scroll_mapper>,
+            <&zip_scroll_scaler 1 5>;
     };
 
     trackball_listener_R: trackball_listener_R {
@@ -38,9 +44,7 @@ split_inputs {
       status = "disabled";
         input-processors =
             <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>,
-            <&zip_xy_scaler 1 8>,
-            <&zip_xy_to_scroll_mapper>,
-            <&zip_scroll_scaler 1 5>;
+            <&zip_temp_layer 4 1000>;
     };
 
     default_transform: keymap_transform_0 {
