@@ -44,7 +44,7 @@ split_inputs {
       status = "disabled";
         input-processors =
             <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>,
-            <&zip_temp_layer 4 1000>;
+            <&zip_temp_layer 4 750>;
     };
 
     default_transform: keymap_transform_0 {
